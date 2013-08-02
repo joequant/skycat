@@ -35,6 +35,9 @@
 
 #include <stdio.h>
 #ifdef HAVE_TKCANVAS_H
+/* work around compile problems on 32-bit linux */
+#undef HAVE_TYPE_OFF64_T
+#undef HAVE_STRUCT_STAT64
 #include "tclInt.h"
 #include "tkCanvas.h"
 #else
@@ -75,8 +78,8 @@ TkCanvasPsImage_Init()
 {
     /*  Need to access the Tk Image type and supercede the Postscript
      *  command. */
-    Tk_ItemType *tkImageType = getTkImageType();
-    tkImageType->postscriptProc = RtdImageToPostscript;
+  /*    Tk_ItemType *tkImageType = getTkImageType();
+	tkImageType->postscriptProc = RtdImageToPostscript; */
 }
 
 /*
